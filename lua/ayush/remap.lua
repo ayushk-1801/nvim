@@ -61,4 +61,5 @@ vim.keymap.set("i", "kj", "<ESC>")
 
 
 vim.keymap.set("n", '<C-r>', [[:!g++ -std=c++20 -DLOCAL % -o x.out && ./x.out<input.txt<CR>]], { noremap = true, silent = true })
+vim.keymap.set("n", '<leader><C-r>', [[:!g++ -std=c++20 -Wshadow -Wall -DLOCAL % -o x.out -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g && ./x.out<input.txt<CR>]], { noremap = true, silent = true })
 -- vim.keymap.set("n", '<C-r>', [[:!g++ -std=c++20 -DLOCAL % -o x.out && ./x.out<input.txt>output.txt<CR>]], { noremap = true, silent = true })
