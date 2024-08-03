@@ -29,12 +29,12 @@ function cmp.diagnostic_status()
     local levels = vim.diagnostic.severity
     local errors = #vim.diagnostic.get(0, {severity = levels.ERROR})
     if errors > 0 then
-        return ' ✘ '
+        return ''
     end
 
     local warnings = #vim.diagnostic.get(0, {severity = levels.WARN})
     if warnings > 0 then
-        return ' ▲ '
+        return ''
     end
 
     return ok
