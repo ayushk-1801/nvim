@@ -70,4 +70,5 @@ vim.g.netrw_winsize = 25
 vim.g.moonflyTransparent = true
 vim.g.moonflyWinSeparator = 2
 vim.g.moonflyCursorColor = true
+
 vim.cmd("colorscheme moonfly")
