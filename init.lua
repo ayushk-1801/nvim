@@ -1,5 +1,37 @@
-require("options")
-require("keymaps")
+-- NOTE: OPTIONS
+
+vim.opt.nu = true
+vim.opt.relativenumber = true
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+
+vim.opt.wrap = false
+vim.opt.cursorline = true
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "no"
+vim.opt.isfname:append("@-@")
+
+vim.opt.title = true
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+vim.opt.updatetime = 50
+vim.opt.errorbells = false
+
+vim.g.netrw_banner = 1
+vim.g.netrw_mouse = 2
+
+vim.g.ayucolor = "dark"
+
+vim.cmd("colorscheme ayu")
+
+
+-- NOTE: PLUGINS
 
 require "paq" {
     'savq/paq-nvim',
@@ -43,6 +75,8 @@ require "paq" {
 
     'nvim-lua/plenary.nvim';
 
+    "tpope/vim-fugitive";
+
     'nvim-lualine/lualine.nvim',
 
     'nvim-tree/nvim-web-devicons',
@@ -63,10 +97,15 @@ require "paq" {
 
     'nvim-lua/plenary.nvim';
 
+    {
+        'iamcco/markdown-preview.nvim',
+        opt = true
+    };
+
     'ayu-theme/ayu-vim';
 }
 
--- TRESITTER
+-- TREESITTER
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         "vimdoc", "javascript", "typescript", "c", "lua", "rust",
@@ -323,5 +362,61 @@ vim.keymap.set({ "i", "s" }, "<C-E>", function()
     end
 end, { silent = true })
 
+-- MARKDOWN
+vim.g.mkdp_filetypes = { "markdown" }
 
-vim.cmd("colorscheme ayu")
+vim.cmd([[
+  augroup markdown_preview_build
+    autocmd!
+    autocmd User PaqInstallPost, PaqUpdatePost ++once call system('cd ' .. fn.stdpath('data') .. '/site/pack/paqs/start/markdown-preview.nvim/app && yarn install')
+  augroup END
+]])
+
+vim.cmd([[
+  command! MarkdownPreviewToggle execute 'MarkdownPreviewToggle'
+  command! MarkdownPreview execute 'MarkdownPreview'
+  command! MarkdownPreviewStop execute 'MarkdownPreviewStop'
+]])
+
+
+-- NOTE: KEYMAPS
+
+vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+
+vim.keymap.set("i", "<C-c>", "<Esc>")
+
+vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+vim.keymap.set("i", "jk", "<ESC>")
+vim.keymap.set("i", "kj", "<ESC>")
+
+vim.keymap.set("n", "<leader>nj", ":bp<CR>")
+vim.keymap.set("n", "<leader>nk", ":bn<CR>")
+
+vim.keymap.set("n", "<leader>nh", ":nohl<CR>")
+
+vim.keymap.set("n", "<leader>fm", ":Format<CR>")
+vim.keymap.set("n", "-", ":Ex<CR>")
