@@ -29,6 +29,19 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "gopls",
+                "bashls",
+                "cssls",
+                "clangd",
+                "emmet_ls",
+                "emmet_language_server",
+                "eslint",
+                "graphql",
+                "html",
+                "jsonls",
+                "markdown_oxide",
+                "prismals",
+                "tailwindcss",
+                "ts_ls"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
