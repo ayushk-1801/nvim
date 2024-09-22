@@ -29,7 +29,7 @@ autocmd('TextYankPost', {
     end,
 })
 
-autocmd({"BufWritePre"}, {
+autocmd({ "BufWritePre" }, {
     group = AyushGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
