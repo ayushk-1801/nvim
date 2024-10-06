@@ -12,6 +12,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>")
 
 vim.keymap.set('n', 'P', '"+p')
+vim.keymap.set('v', 'P', '"+p')
 
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
